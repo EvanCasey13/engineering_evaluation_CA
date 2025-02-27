@@ -13,5 +13,8 @@ from subroutines.modelling.modelling_util import (
     train_model
 )
 
+# Import the model
+from abstract_model import model
+
 # Get the dataframe we will use
 dataframe = data_selection()
