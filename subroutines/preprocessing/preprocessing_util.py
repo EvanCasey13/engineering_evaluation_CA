@@ -9,7 +9,7 @@ import numpy as np
 import pandas as pd
 
 def data_selection():
-    df = pd.read_csv("AppGallery.csv")
+    df = pd.read_csv("./dataset/AppGallery.csv")
 
     # convert the dtype object to unicode string
     df['Interaction content'] = df['Interaction content'].values.astype('U')
@@ -129,7 +129,7 @@ def text_data_rep(df):
     x2 = tfidfconverter.fit_transform(temp["ts_en"]).toarray()
     X = np.concatenate((x1, x2), axis=1)
     
-def trans_to_en(texts):
+def trans_to_en(texts, temp):
     t2t_m = "facebook/m2m100_418M"
     t2t_pipe = pipeline(task='text2text-generation', model=t2t_m)
 
@@ -177,10 +177,9 @@ def trans_to_en(texts):
 
             print(text)
             print(text_en)
+            #Calling translation method
+            # Note that the we can only translate a limited number of words so we are only translating ticket summary and not interaction content
+
+            temp["ts_en"] = trans_to_en(temp["ts"].to_list())
 
     return text_en_l
-	
-#Calling translation method
-# Note that the we can only translate a limited number of words so we are only translating ticket summary and not interaction content
-
-temp["ts_en"] = trans_to_en(temp["ts"].to_list())

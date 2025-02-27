@@ -18,3 +18,4 @@ from abstract_model import model
 
 # Get the dataframe we will use
 dataframe = data_selection()
+print(dataframe)
