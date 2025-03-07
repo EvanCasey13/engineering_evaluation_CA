@@ -16,17 +16,11 @@ def data_selection():
     df['Ticket Summary'] = df['Ticket Summary'].values.astype('U')
 
     #Optional: rename variable names for remembering easily
-    df["y1"] = df["Type 1"]
-    df["y2"] = df["Type 2"]
-    df["y3"] = df["Type 3"]
-    df["y4"] = df["Type 4"]
+    df["t1"] = df["Type 1"]
+    df["t2"] = df["Type 2"]
+    df["t3"] = df["Type 3"]
+    df["t4"] = df["Type 4"]
     df["x"] = df['Interaction content']
-
-    df["y"] = df["y2"]
-
-    # remove empty y
-    df = df.loc[(df["y"] != '') & (~df["y"].isna()),]
-    df.shape
 
     print(df.shape)
     return df
@@ -34,6 +28,7 @@ def data_selection():
 def data_model_preparation(X, y):
     y = y.to_numpy()
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+    return X_train, X_test, y_train, y_test
     
     
 def handle_data_imbalance(y, X, new_test_size):
@@ -112,7 +107,8 @@ def remove_noise(df):
     good_y1 = temp.y1.value_counts()[temp.y1.value_counts() > 10].index
     temp = temp.loc[temp.y1.isin(good_y1)]
     print(temp.shape)
-    
+    return temp
+
 def display_results(classifier, X_test, y_test):
     y_pred = classifier.predict(X_test)
 
