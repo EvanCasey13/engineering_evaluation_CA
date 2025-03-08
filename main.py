@@ -21,10 +21,6 @@ for col in ['t2', 't3', 't4']:
     dataframe[col] = le.fit_transform(dataframe[col])
 
 # Define type variables
-type_1 = dataframe['t1']
-type_2 = dataframe['t2']
-type_3 = dataframe['t3']
-type_4 = dataframe['t4']
 y_all_types = dataframe[['t2','t3','t4']]
 
 # Initialize the model
