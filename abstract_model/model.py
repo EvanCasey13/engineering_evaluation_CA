@@ -1,6 +1,6 @@
 # This is a abstract class that can be used by any ML model to perform specific tasks
 from sklearn.model_selection import train_test_split 
-from sklearn.metrics import classification_report
+from sklearn.metrics import classification_report, hamming_loss, accuracy_score
 from sklearn.ensemble import RandomForestClassifier 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.multioutput import ClassifierChain
@@ -34,3 +34,21 @@ class MLModel:
         for i in range(y_test_np.shape[1]):
             print(f"classification report for output {i + 1}:")
             print(classification_report(y_test_np[:, i], predictions_np[:, i], zero_division=0))
+            
+    def get_hamming_loss(self):
+        y_test_np = np.array(self.y_test) 
+        predictions_np = np.array(self.predict())
+        for i in range(y_test_np.shape[1]):
+            print(f"hamming loss for output {i + 1}:")
+            h_loss = hamming_loss(y_test_np[:, i], predictions_np[:, i])
+            print(round(h_loss, 2))
+            print()
+
+    def get_accuracy_score(self):
+        y_test_np = np.array(self.y_test) 
+        predictions_np = np.array(self.predict())
+        for i in range(y_test_np.shape[1]):
+            print(f"accuracy score for output {i + 1}:")
+            acc_score = accuracy_score(y_test_np[:, i], predictions_np[:, i])
+            print(round(acc_score, 2))
+            print()

@@ -30,3 +30,9 @@ predictions = ml_model.chain.predict(X_test_transformed)
 
 # Print classification reports for each type
 ml_model.print_classification_results()
+
+# hamming loss
+ml_model.get_hamming_loss()
+
+# accuracy score
+ml_model.get_accuracy_score()
