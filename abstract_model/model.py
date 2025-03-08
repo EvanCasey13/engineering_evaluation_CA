@@ -1,10 +1,10 @@
 # This is a abstract class that can be used by any ML model to perform specific tasks
 from sklearn.model_selection import train_test_split 
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import classification_report
 from sklearn.ensemble import RandomForestClassifier 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.multioutput import ClassifierChain
-from sklearn.preprocessing import LabelEncoder
+import numpy as np
 
 class MLModel:
     def __init__(self, X, y, model=None):
@@ -28,7 +28,9 @@ class MLModel:
     def get_params(self, deep=True):
         return self.model.get_params(deep=deep)
     
-    def print_results(self):
-        prediction = self.predict()
-        accuracy = accuracy_score(self.y_test, prediction)
-        print(f"Model Accuracy: {accuracy:.2f}")
+    def print_classification_results(self):
+        y_test_np = np.array(self.y_test) 
+        predictions_np = np.array(self.predict())
+        for i in range(y_test_np.shape[1]):
+            print(f"classification report for output {i + 1}:")
+            print(classification_report(y_test_np[:, i], predictions_np[:, i], zero_division=0))

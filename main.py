@@ -42,7 +42,5 @@ predictions = ml_model.chain.predict(X_test_transformed)
 y_test_np = np.array(ml_model.y_test) 
 predictions_np = np.array(predictions)
 
-print(y_test_np.shape)
-for i in range(y_test_np.shape[1]):
-    print(f"classification report for output {i + 1}:")
-    print(classification_report(y_test_np[:, i], predictions_np[:, i], zero_division=0))
+# Print classification reports for each type
+ml_model.print_classification_results()
