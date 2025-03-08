@@ -21,8 +21,8 @@ def data_selection():
     df["t3"] = df["Type 3"]
     df["t4"] = df["Type 4"]
     df["x"] = df['Interaction content']
-
-    print(df.shape)
+    df = df.dropna(subset=['t2', 't3', 't4']) 
+    df = df[(df[['t2', 't3', 't4']] != '').all(axis=1)] 
     return df
     
 def data_model_preparation(X, y):
