@@ -36,3 +36,12 @@ ml_model.get_hamming_loss()
 
 # accuracy score
 ml_model.get_accuracy_score()
+
+# Precision score
+ml_model.get_precision_score()
+
+# Recall score
+ml_model.get_recall_score()
+
+# f1 score
+ml_model.get_f1_score()
